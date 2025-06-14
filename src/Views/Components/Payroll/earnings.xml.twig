@@ -1,0 +1,280 @@
+<Devengados>
+    <Basico DiasTrabajados="{{ earnings.basic.worked_days }}"
+		SueldoTrabajado="{{ earnings.basic.salary_worked }}" />
+
+    {% if earnings.transportation.transportation_assistance or earnings.transportation.viatic_maintenance or earnings.transportation.viatic_non_salary_maintenance %}
+        <Transporte
+            {% if earnings.transportation.transportation_assistance %}
+                AuxilioTransporte="{{ earnings.transportation.transportation_assistance }}"
+            {% endif %}
+            {% if earnings.transportation.viatic_maintenance %}
+                ViaticoManuAlojS="{{ earnings.transportation.viatic_maintenance }}"
+            {% endif %}
+            {% if earnings.transportation.viatic_non_salary_maintenance %}
+                ViaticoManuAlojNS="{{ earnings.transportation.viatic_non_salary_maintenance }}"
+            {% endif %}
+        ></Transporte>
+    {% else %}
+        <Transporte></Transporte>
+    {% endif %}
+
+    {# Day Overtime  #}
+    {% if earnings.overtime.daytimes %}
+        <HEDs>
+            {% include 'Components/Payroll/overtime.xml.twig' with {
+                'node': 'HED',
+                'items': earnings.overtime.daytimes
+            } %}
+        </HEDs>
+    {% endif %}
+
+    {# Night Overtime  #}
+    {% if earnings.overtime.nighttimes %}
+        <HENs>
+            {% include 'Components/Payroll/overtime.xml.twig' with {
+                'node': 'HEN',
+                'items': earnings.overtime.nighttimes
+            } %}
+        </HENs>
+    {% endif %}
+
+    {# Night surcharge #}
+    {% if earnings.surcharges.nighttimes %}
+        <HRNs>
+            {% include 'Components/Payroll/overtime.xml.twig' with {
+                'node': 'HRN',
+                'items': earnings.surcharges.nighttimes
+            } %}
+        </HRNs>
+    {% endif %}
+
+    {# Day Time Overtime on Sunday and Holidays  #}
+    {% if earnings.overtime.daytime_sunday_holidays %}
+        <HEDDFs>
+            {% include 'Components/Payroll/overtime.xml.twig' with {
+                'node': 'HEDDF',
+                'items': earnings.overtime.daytime_sunday_holidays
+            } %}
+        </HEDDFs>
+    {% endif %}
+
+    {# Day Time Surcharge on Sundays and Holidays #}
+    {% if earnings.surcharges.daytime_sunday_holidays %}
+        <HRDDFs>
+            {% include 'Components/Payroll/overtime.xml.twig' with {
+                'node': 'HRDDF',
+                'items': earnings.surcharges.daytime_sunday_holidays
+            } %}
+        </HRDDFs>
+    {% endif %}
+
+    {# Night Time Overtime on Sunday and Holidays  #}
+    {% if earnings.overtime.nighttime_sunday_holidays %}
+        <HENDFs>
+            {% include 'Components/Payroll/overtime.xml.twig' with {
+                'node': 'HENDF',
+                'items': earnings.overtime.nighttime_sunday_holidays
+            } %}
+        </HENDFs>
+    {% endif %}
+
+    {# Night Time Surcharge on Sundays and Holidays #}
+    {% if earnings.surcharges.nighttime_sunday_holidays %}
+        <HRNDFs>
+            {% include 'Components/Payroll/overtime.xml.twig' with {
+                'node': 'HRNDF',
+                'items': earnings.surcharges.nighttime_sunday_holidays
+            } %}
+        </HRNDFs>
+    {% endif %}
+
+    {# Common And Paid Vacations #}
+    {% if earnings.vacations.common is defined or earnings.vacations.paid is defined %}
+        <Vacaciones>
+            {% if earnings.vacations.common is defined %}
+                {% include 'Components/Payroll/general-item.xml.twig' with {
+                    'node': 'VacacionesComunes',
+                    'item': earnings.vacations.common
+                } %}
+            {% endif %}
+            {% if earnings.vacations.paid is defined %}
+                {% include 'Components/Payroll/general-item.xml.twig' with {
+                    'node': 'VacacionesCompensadas',
+                    'item': earnings.vacations.paid
+                } %}
+            {% endif %}
+        </Vacaciones>
+    {% endif %}
+
+    {# Service Bonus #}
+    {% if earnings.service_bonus is defined %}
+        {% include 'Components/Payroll/general-item.xml.twig' with {
+            'node': 'Primas',
+            'item': earnings.service_bonus
+        } %}
+    {% endif %}
+
+    {# Severance #}
+    {% if earnings.severance is defined %}
+        <Cesantias Pago="{{ earnings.severance.payment_amount }}"
+            Porcentaje="{{ earnings.severance.percentage }}"
+            PagoIntereses="{{ earnings.severance.interest_payment_amount }}"
+        />
+    {% endif %}
+
+    {# Disabilities #}
+    {% if earnings.disabilities is defined %}
+        <Incapacidades>
+            {% for disability in earnings.disabilities %}
+                {% include 'Components/Payroll/general-item.xml.twig' with {
+                    'node': 'Incapacidad',
+                    'item': disability
+                } %}
+            {% endfor %}
+        </Incapacidades>
+    {% endif %}
+
+    {# Licenses #}
+    {% if earnings.leaves is defined %}
+        <Licencias>
+            {% if earnings.leaves.parental_leave is defined %}
+                {% include 'Components/Payroll/general-item.xml.twig' with {
+                    'node': 'LicenciaMP',
+                    'item': earnings.leaves.parental_leave
+                } %}
+            {% endif %}
+            {% if earnings.leaves.paid_leave is defined %}
+                {% include 'Components/Payroll/general-item.xml.twig' with {
+                    'node': 'LicenciaR',
+                    'item': earnings.leaves.paid_leave
+                } %}
+            {% endif %}
+            {% if earnings.leaves.unpaid_leave is defined %}
+                {% include 'Components/Payroll/general-item.xml.twig' with {
+                    'node': 'LicenciaNR',
+                    'item': earnings.leaves.unpaid_leave
+                } %}
+            {% endif %}
+        </Licencias>
+    {% endif %}
+
+    {# Bonuses #}
+    {% if earnings.bonuses is defined %}
+        <Bonificaciones>
+            {% for bonus in earnings.bonuses %}
+                <Bonificacion BonificacionS="{{ bonus.salary_bonus }}" BonificacionNS="{{ bonus.non_salary_bonus }}" />
+            {% endfor %}
+        </Bonificaciones>
+    {% endif %}
+
+    {# Assistance #}
+    {% if earnings.assistance is defined %}
+        <Auxilios>
+            {% for assistance in earnings.assistance %}
+                <Auxilio AuxilioS="{{ assistance.salary_assistance }}" AuxilioNS="{{ assistance.non_salary_assistance }}"/>
+            {% endfor %}
+        </Auxilios>
+    {% endif %}
+
+    {# Legal Strikes #}
+    {% if earnings.legal_strikes is defined %}
+        <HuelgasLegales>
+            {% for legal_strike in earnings.legal_strikes %}
+                {% include 'Components/Payroll/general-item.xml.twig' with {
+                    'node': 'HuelgaLegal',
+                    'item': legal_strike
+                } %}
+            {% endfor %}
+        </HuelgasLegales>
+    {% endif %}
+
+    {# Other Concepts #}
+    {% if earnings.others is defined %}
+        <OtrosConceptos>
+            {% for other in earnings.others %}
+                <OtroConcepto DescripcionConcepto="{{ other.description }}"
+                    ConceptoS="{{ other.salary_concept }}"
+                    ConceptoNS="{{ other.non_salary_concept }}"/>
+            {% endfor %}
+        </OtrosConceptos>
+    {% endif %}
+
+    {# Compensations #}
+    {% if earnings.compensations is defined %}
+        <Compensaciones>
+            {% for compensation in earnings.compensations %}
+                <Compensacion CompensacionO="{{ compensation.ordinary }}"
+                    CompensacionE="{{ compensation.extraordinary }}"/>
+            {% endfor %}
+        </Compensaciones>
+    {% endif %}
+
+    {# EPCTVs Bonuses #}
+    {% if earnings.epctvs_bonuses is defined %}
+        <BonoEPCTVs>
+            {% for epctv in earnings.epctvs_bonuses %}
+                <BonoEPCTV PagoS="{{ epctv.salary_in_kind }}"
+                    PagoNS="{{ epctv.non_salary_in_kind }}"
+                    PagoAlimentacionS="{{ epctv.meal_in_kind }}"
+                    PagoAlimentacionNS="{{ epctv.non_salary_meal_in_kind }}"/>
+            {% endfor %}
+        </BonoEPCTVs>
+    {% endif %}
+
+    {# Commissions #}
+    {% if earnings.commissions is defined %}
+        <Comisiones>
+            {% for commission in earnings.commissions %}
+                <Comision>{{ commission.commission }}</Comision>
+            {% endfor %}
+        </Comisiones>
+    {% endif %}
+
+    {# Third party payments #}
+    {% if earnings.third_party_payments is defined %}
+        <PagosTerceros>
+            {% for third_party_payment in earnings.third_party_payments %}
+                <PagoTercero>{{ third_party_payment.third_party_payment }}</PagoTercero>
+            {% endfor %}
+        </PagosTerceros>
+    {% endif %}
+
+    {# Advances #}
+    {% if earnings.advances is defined %}
+        <Anticipos>
+            {% for advance in earnings.advances %}
+                <Anticipo>{{ advance.advance }}</Anticipo>
+            {% endfor %}
+        </Anticipos>
+    {% endif %}
+
+    {# Endowment #}
+    {% if earnings.endowment is defined %}
+        <Dotacion>{{ earnings.endowment }}</Dotacion>
+    {% endif %}
+
+    {# Sustaining support #}
+    {% if earnings.sustaining_support is defined %}
+        <ApoyoSost>{{ earnings.sustaining_support }}</ApoyoSost>
+    {% endif %}
+
+    {# Teleworking #}
+    {% if earnings.teleworking is defined %}
+        <Teletrabajo>{{ earnings.teleworking }}</Teletrabajo>
+    {% endif %}
+
+    {# Withdrawal bonus #}
+    {% if earnings.withdrawal_bonus is defined %}
+        <BonifRetiro>{{ earnings.withdrawal_bonus }}</BonifRetiro>
+    {% endif %}
+
+    {# Indemnification #}
+    {% if earnings.indemnification is defined %}
+        <Indemnizacion>{{ earnings.indemnification }}</Indemnizacion>
+    {% endif %}
+
+    {# Refund #}
+    {% if earnings.refund is defined %}
+        <Reintegro>{{ earnings.refund }}</Reintegro>
+    {% endif %}
+</Devengados>

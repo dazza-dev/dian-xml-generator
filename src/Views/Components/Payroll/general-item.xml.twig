@@ -1,0 +1,25 @@
+<{{ node }}
+    {# Start Date #}
+    {% if item.start_date is defined and item.start_date is not null %}
+    FechaInicio="{{ item.start_date }}"
+    {% endif %}
+    {# End Date #}
+    {% if item.end_date is defined and item.end_date is not null %}
+    FechaFin="{{ item.end_date }}"
+    {% endif %}
+    {# Quantity #}
+    {% if item.quantity is defined and item.quantity is not null %}
+    Cantidad="{{ item.quantity }}"
+    {% endif %}
+    {# Type #}
+    {% if item.type.code is defined and item.type.code is not null %}
+    Tipo="{{ item.type.code }}"
+    {% endif %}
+    {# Percentage #}
+    {% if item.percentage is defined and item.percentage is not null %}
+    Porcentaje="{{ (item.percentage | number_format(2, '.', '')) }}"
+    {% endif %}
+    {# Payment Amount #}
+    {% if item.payment_amount is defined and item.payment_amount is not null %}
+    Pago="{{ (item.payment_amount | number_format(2, '.', '')) }}"
+    {% endif %}/>

@@ -1,0 +1,37 @@
+{% apply spaceless %}<?xml version="1.0" encoding="UTF-8" standalone="no"?>{% endapply %}
+<NominaIndividual xmlns="dian:gov:co:facturaelectronica:NominaIndividual"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                  xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                  xmlns:xades="http://uri.etsi.org/01903/v1.3.2#"
+                  xmlns:xades141="http://uri.etsi.org/01903/v1.4.1#"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  SchemaLocation=""
+                  xsi:schemaLocation="dian:gov:co:facturaelectronica:NominaIndividual NominaIndividualElectronicaXSD.xsd">
+    {# UBLExtensions #}
+    {% include 'Components/ubl-extensions-payroll.xml.twig' %}
+    {# Novelty #}
+    {% include 'Components/Payroll/novelty.xml.twig' %}
+    {# Period #}
+    {% include 'Components/Payroll/period.xml.twig' %}
+    {# Secuence Number #}
+    {% include 'Components/Payroll/secuence-number.xml.twig' %}
+    {# Generation Place #}
+    {% include 'Components/Payroll/generation-place.xml.twig' %}
+    {# Provider #}
+    {% include 'Components/Payroll/provider.xml.twig' %}
+    {# General Information #}
+    {% include 'Components/Payroll/general-information.xml.twig' %}
+    {# Employer #}
+    {% include 'Components/Payroll/employer.xml.twig' %}
+    {# Employee #}
+    {% include 'Components/Payroll/employee.xml.twig' %}
+    {# Payment #}
+    {% include 'Components/Payroll/payment.xml.twig' %}
+    {# Earnings #}
+    {% include 'Components/Payroll/earnings.xml.twig' %}
+    {# Deductions #}
+    {% include 'Components/Payroll/deductions.xml.twig' %}
+    {# Total #}
+    {% include 'Components/Payroll/totals.xml.twig' %}
+</NominaIndividual>

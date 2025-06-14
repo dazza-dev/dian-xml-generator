@@ -1,0 +1,22 @@
+<Trabajador
+    TipoTrabajador="{{ employee.worker_type.code }}"
+    SubTipoTrabajador="{{ employee.worker_subtype.code }}"
+    AltoRiesgoPension="{{ employee.high_risk_pension ? 'true' : 'false' }}"
+    TipoDocumento="{{ employee.identification_type.code }}"
+    NumeroDocumento="{{ employee.identification_number }}"
+    PrimerNombre="{{ employee.first_name }}"
+    {% if employee.other_names %}
+    OtrosNombres="{{ employee.other_names }}"
+    {% endif %}
+    PrimerApellido="{{ employee.first_surname }}"
+    {% if employee.second_surname %}
+    SegundoApellido="{{ employee.second_surname }}"
+    {% endif %}
+    LugarTrabajoPais="{{ employee.country.code }}"
+    LugarTrabajoDepartamentoEstado="{{ employee.state.code }}"
+    LugarTrabajoMunicipioCiudad="{{ employee.city.code }}"
+    LugarTrabajoDireccion="{{ employee.address.address_line }}"
+    SalarioIntegral="{{ employee.integral_salary ? 'true' : 'false' }}"
+    TipoContrato="{{ employee.contract_type.code }}"
+    Sueldo="{{ employee.salary }}"
+    CodigoTrabajador="{{ employee.worker_code }}"/>

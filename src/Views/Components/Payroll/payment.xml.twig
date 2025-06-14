@@ -1,0 +1,14 @@
+<Pago
+    Forma="{{ payment.payment_mean.code }}"
+    Metodo="{{ payment.payment_method.code }}"
+    {% if payment.bank_name %}
+    Banco="{{ payment.bank_name }}"
+    TipoCuenta="{{ payment.account_type }}"
+    NumeroCuenta="{{ payment.account_number }}"
+    {% endif %}
+></Pago>
+<FechasPagos>
+    {% for date in payment.dates %}
+    <FechaPago>{{ date }}</FechaPago>
+    {% endfor %}
+</FechasPagos>

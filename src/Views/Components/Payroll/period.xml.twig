@@ -1,0 +1,8 @@
+<Periodo FechaIngreso="{{ period.admission_date }}"
+    {% if period.retirement_date is defined and period.retirement_date is not null %}
+    FechaRetiro="{{ period.retirement_date }}"
+    {% endif %}
+    FechaLiquidacionInicio="{{ period.settlement.start_date }}"
+    FechaLiquidacionFin="{{ period.settlement.end_date }}"
+    TiempoLaborado="{{ (period.worked_time | number_format(2, '.', '')) }}"
+    FechaGen="{{ issue_date }}"/>
