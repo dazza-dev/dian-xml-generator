@@ -1,0 +1,12 @@
+{% for item in items %}
+    <{{ node }}
+        {% if item.start_time is defined and item.start_time is not null %}
+            HoraInicio="{{ item.start_time }}"
+        {% endif %}
+        {% if item.end_time is defined and item.end_time is not null %}
+            HoraFin="{{ item.end_time }}"
+        {% endif %}
+        Cantidad="{{ item.quantity }}"
+        Porcentaje="{{ (item.percentage | number_format(2, '.', '')) }}"
+        Pago="{{ (item.payment_amount | number_format(2, '.', '')) }}"/>
+{% endfor %}

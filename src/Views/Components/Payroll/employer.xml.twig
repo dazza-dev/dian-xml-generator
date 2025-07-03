@@ -1,0 +1,20 @@
+<Empleador
+    RazonSocial="{{ employer.company_name }}"
+    {% if employer.first_name %}
+    PrimerNombre="{{ employer.first_name }}"
+    {% endif %}
+    {% if employer.other_names %}
+    OtrosNombres="{{ employer.other_names }}"
+    {% endif %}
+    {% if employer.first_surname %}
+    PrimerApellido="{{ employer.first_surname }}"
+    {% endif %}
+    {% if employer.second_surname %}
+    SegundoApellido="{{ employer.second_surname }}"
+    {% endif %}
+    NIT="{{ employer.identification_number }}"
+    DV="{{ employer.verification_code }}"
+    Pais="{{ employer.country.code }}"
+    DepartamentoEstado="{{ employer.state.code }}"
+    MunicipioCiudad="{{ employer.city.code }}"
+    Direccion="{{ employer.address.address_line }}" />

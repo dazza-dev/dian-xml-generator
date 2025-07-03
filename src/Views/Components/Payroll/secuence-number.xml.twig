@@ -1,0 +1,7 @@
+<NumeroSecuenciaXML
+    {% if employee.worker_code is defined and employee.worker_code is not null %}
+    CodigoTrabajador="{{ employee.worker_code }}"
+    {% endif %}
+    Prefijo="{{ prefix }}"
+    Consecutivo="{{ number }}"
+    Numero="{{ full_number }}"/>

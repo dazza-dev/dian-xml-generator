@@ -1,0 +1,19 @@
+<InformacionGeneral
+    Version="V1.0: {{ document_type.name }}"
+    Ambiente="{{ environment.code }}"
+    TipoXML="{{ document_type.code }}"
+    CUNE=""
+    EncripCUNE="{{ document_type.hash_type }}"
+    FechaGen="{{ issue_date }}"
+    HoraGen="{{ issue_time }}"
+    {% if period is defined and period.type is defined and period.type.code is defined %}
+    PeriodoNomina="{{ period.type.code }}"
+    {% endif %}
+    {% if currency is defined and currency.code is defined %}
+    TipoMoneda="{{ currency.code }}"
+    TRM="1"
+    {% endif %}
+></InformacionGeneral>
+{% if note %}
+    <Notas>{{ note }}</Notas>
+{% endif %}
