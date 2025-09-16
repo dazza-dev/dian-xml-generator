@@ -56,12 +56,12 @@ class LineItem
     /**
      * Allowance charges
      */
-    private ?array $allowanceCharges = [];
+    private array $allowanceCharges = [];
 
     /**
      * Reference price
      */
-    private ?ReferencePrice $referencePrice;
+    private ?ReferencePrice $referencePrice = null;
 
     /**
      * LineItem constructor
@@ -282,7 +282,7 @@ class LineItem
      */
     public function getReferencePrice(): ?ReferencePrice
     {
-        return $this->referencePrice ?? null;
+        return $this->referencePrice;
     }
 
     /**

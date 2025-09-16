@@ -30,7 +30,7 @@ class PayrollBase
 
     private string $issueTime;
 
-    private ?string $note;
+    private ?string $note = null;
 
     private ?Currency $currency = null;
 
