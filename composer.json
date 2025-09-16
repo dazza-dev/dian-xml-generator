@@ -34,5 +34,13 @@
         "psr-4": {
             "DazzaDev\\DianXmlGenerator\\Tests\\": "tests/"
         }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1"
+    },
+    "scripts": {
+        "analyse": "phpstan analyse",
+        "analyse-level": "phpstan analyse --level",
+        "test-static": "phpstan analyse --no-progress"
     }
 }
