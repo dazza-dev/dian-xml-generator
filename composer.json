@@ -1,46 +1,49 @@
 {
-    "name": "dazza-dev/dian-xml-generator",
-    "description": "Generador XML para facturacion electonica DIAN.",
-    "keywords": [
-        "dian",
-        "feco",
-        "factura electrónica"
-    ],
-    "type": "library",
-    "license": "MIT",
-    "require": {
-        "php": ">=8.0",
-        "rmunate/dian-colombia": "^1.4",
-        "twig/twig": "^3.19"
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
-    },
-    "minimum-stability": "stable",
-    "authors": [
-        {
-            "name": "Andres Daza",
-            "email": "adaza90@outlook.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "DazzaDev\\DianXmlGenerator\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "DazzaDev\\DianXmlGenerator\\Tests\\": "tests/"
-        }
-    },
-    "require-dev": {
-        "phpstan/phpstan": "^2.1"
-    },
-    "scripts": {
-        "analyse": "phpstan analyse",
-        "analyse-level": "phpstan analyse --level",
-        "test-static": "phpstan analyse --no-progress"
+  "name": "dazza-dev/dian-xml-generator",
+  "description": "Generador XML para facturación electronica DIAN.",
+  "keywords": [
+    "dian",
+    "feco",
+    "factura electrónica"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.0",
+    "rmunate/dian-colombia": "^1.4",
+    "twig/twig": "^3.19"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Andres Daza",
+      "email": "adaza90@outlook.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DazzaDev\\DianXmlGenerator\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DazzaDev\\DianXmlGenerator\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0",
+    "phpstan/phpstan": "^2.1"
+  },
+  "scripts": {
+    "test": "phpunit",
+    "test-coverage": "phpunit --coverage-html coverage",
+    "analyse": "phpstan analyse",
+    "analyse-level": "phpstan analyse --level",
+    "test-static": "phpstan analyse --no-progress"
+  }
 }
