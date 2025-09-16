@@ -21,7 +21,7 @@ trait Identification
     /**
      * Verification code
      */
-    private string $verificationCode;
+    private int $verificationCode;
 
     /**
      * Get identification type
@@ -57,13 +57,13 @@ trait Identification
         $this->identificationNumber = $identificationNumber;
 
         // Calculate verification code
-        $this->verificationCode = DIAN::digitoVerificacion($this->identificationNumber);
+        $this->verificationCode = DIAN::digitoVerificacion((int) $this->identificationNumber);
     }
 
     /**
      * Get verification code
      */
-    public function getVerificationCode(): string
+    public function getVerificationCode(): int
     {
         return $this->verificationCode;
     }
