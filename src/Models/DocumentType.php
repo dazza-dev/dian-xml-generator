@@ -2,18 +2,10 @@
 
 namespace DazzaDev\DianXmlGenerator\Models;
 
-class DocumentType
+use DazzaDev\DianXmlGenerator\Models\BaseModel;
+
+class DocumentType extends BaseModel
 {
-    /**
-     * Document type code
-     */
-    private string $code;
-
-    /**
-     * Document type name
-     */
-    private string $name;
-
     /**
      * Hash type
      */
@@ -25,54 +17,20 @@ class DocumentType
     private string $codeType;
 
     /**
-     * Document type constructor
+     * DocumentType constructor
      */
     public function __construct(array $data = [])
     {
-        $this->initialize($data);
+        $this->initializeAdditionalProperties($data);
     }
 
     /**
-     * Initialize document type data
+     * Initialize additional properties specific to DocumentType
      */
-    private function initialize(array $data): void
+    protected function initializeAdditionalProperties(array $data): void
     {
-        $this->setCode($data['code']);
-        $this->setName($data['name']);
         $this->setHashType($data['hash_type']);
         $this->setCodeType($data['code_type']);
-    }
-
-    /**
-     * Get document type code
-     */
-    public function getCode(): string
-    {
-        return $this->code;
-    }
-
-    /**
-     * Set document type code
-     */
-    private function setCode(string $code): void
-    {
-        $this->code = $code;
-    }
-
-    /**
-     * Get document type name
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set document type name
-     */
-    private function setName(string $name): void
-    {
-        $this->name = $name;
     }
 
     /**
@@ -112,11 +70,9 @@ class DocumentType
      */
     public function toArray(): array
     {
-        return [
-            'code' => $this->code,
-            'name' => $this->name,
+        return array_merge($this->getBaseArray(), [
             'hash_type' => $this->hashType,
             'code_type' => $this->codeType,
-        ];
+        ]);
     }
 }

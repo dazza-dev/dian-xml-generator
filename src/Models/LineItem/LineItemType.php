@@ -2,74 +2,31 @@
 
 namespace DazzaDev\DianXmlGenerator\Models\LineItem;
 
-class LineItemType
+use DazzaDev\DianXmlGenerator\Models\BaseModel;
+
+class LineItemType extends BaseModel
 {
-    /**
-     * code
-     */
-    private string $code;
-
-    /**
-     * name
-     */
-    private string $name;
-
     /**
      * Agency id
      */
     private string $agencyId;
 
     /**
-     * Line item type constructor
+     * LineItemType constructor
      */
     public function __construct(array $data = [])
     {
-        $this->initialize($data);
+        $this->initializeAdditionalProperties($data);
     }
 
     /**
-     * Initialize line item type data
+     * Initialize additional properties specific to LineItemType
      */
-    private function initialize(array $data): void
+    protected function initializeAdditionalProperties(array $data): void
     {
-        $this->setCode($data['code']);
-        $this->setName($data['name']);
-
         if (isset($data['agency_id'])) {
             $this->setAgencyId($data['agency_id']);
         }
-    }
-
-    /**
-     * Get line item type code
-     */
-    public function getCode(): string
-    {
-        return $this->code;
-    }
-
-    /**
-     * Set line item type code
-     */
-    private function setCode(string $code): void
-    {
-        $this->code = $code;
-    }
-
-    /**
-     * Get line item type name
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set line item type name
-     */
-    private function setName(string $name): void
-    {
-        $this->name = $name;
     }
 
     /**
@@ -93,10 +50,8 @@ class LineItemType
      */
     public function toArray(): array
     {
-        return [
-            'code' => $this->getCode(),
-            'name' => $this->getName(),
+        return array_merge($this->getBaseArray(), [
             'agency_id' => $this->getAgencyId(),
-        ];
+        ]);
     }
 }
