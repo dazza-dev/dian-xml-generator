@@ -21,6 +21,8 @@ class DocumentType extends BaseModel
      */
     public function __construct(array $data = [])
     {
+        parent::initialize($data);
+
         $this->initializeAdditionalProperties($data);
     }
 
