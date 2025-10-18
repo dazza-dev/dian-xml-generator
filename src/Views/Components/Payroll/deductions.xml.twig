@@ -1,0 +1,126 @@
+<Deducciones>
+    {# Health #}
+    {% include "Components/Payroll/deduction-item.xml.twig" with {
+        node: 'Salud',
+        item: deductions.health
+    } %}
+
+    {# Pension Fund #}
+    {% include "Components/Payroll/deduction-item.xml.twig" with {
+        node: 'FondoPension',
+        item: deductions.pension_fund
+    } %}
+
+    {# Pension Security Fund #}
+    {% if deductions.pension_security_fund is defined %}
+        <FondoSP Porcentaje="{{ deductions.pension_security_fund.percentage }}"
+		DeduccionSP="{{ deductions.pension_security_fund.deduction }}"
+		PorcentajeSub="{{ deductions.pension_security_fund.subsistence_percentage }}"
+		DeduccionSub="{{ deductions.pension_security_fund.subsistence_deduction }}"
+        />
+    {% endif %}
+
+    {# Labor Unions #}
+    {% if deductions.labor_unions is defined %}
+        <Sindicatos>
+            {% for labor_union in deductions.labor_unions %}
+                {% include "Components/Payroll/deduction-item.xml.twig" with {
+                    node: 'Sindicato',
+                    item: labor_union
+                } %}
+            {% endfor %}
+        </Sindicatos>
+    {% endif %}
+
+    {# Penalties #}
+    {% if deductions.penalties is defined %}
+        <Sanciones>
+            {% for penalty in deductions.penalties %}
+                <Sancion SancionPublic="{{ penalty.public_penalty }}"
+                    SancionPriv="{{ penalty.private_penalty }}"/>
+            {% endfor %}
+        </Sanciones>
+    {% endif %}
+
+    {# Wage Assignments #}
+    {% if deductions.wage_assignments is defined %}
+        <Libranzas>
+            {% for wage_assignment in deductions.wage_assignments %}
+                <Libranza Descripcion="{{ wage_assignment.description }}"
+                    Deduccion="{{ wage_assignment.deduction }}"/>
+            {% endfor %}
+        </Libranzas>
+    {% endif %}
+
+    {# Third party payments #}
+    {% if deductions.third_party_payments is defined %}
+        <PagosTerceros>
+            {% for third_party_payment in deductions.third_party_payments %}
+                <PagoTercero>{{ third_party_payment.third_party_payment }}</PagoTercero>
+            {% endfor %}
+        </PagosTerceros>
+    {% endif %}
+
+    {# Advances #}
+    {% if deductions.advances is defined %}
+        <Anticipos>
+            {% for advance in deductions.advances %}
+                <Anticipo>{{ advance.advance }}</Anticipo>
+            {% endfor %}
+        </Anticipos>
+    {% endif %}
+
+    {# Other Deductions #}
+    {% if deductions.others is defined %}
+        <OtrasDeducciones>
+            {% for other in deductions.others %}
+                <OtraDeduccion>{{ other.deduction }}</OtraDeduccion>
+            {% endfor %}
+        </OtrasDeducciones>
+    {% endif %}
+
+    {# Voluntary Pension #}
+    {% if deductions.voluntary_pension is defined %}
+        <PensionVoluntaria>{{ deductions.voluntary_pension }}</PensionVoluntaria>
+    {% endif %}
+
+    {# Retefuente #}
+    {% if deductions.retefuente is defined %}
+        <RetencionFuente>{{ deductions.retefuente }}</RetencionFuente>
+    {% endif %}
+
+    {# AFC #}
+    {% if deductions.afc is defined %}
+        <AFC>{{ deductions.afc }}</AFC>
+    {% endif %}
+
+    {# Cooperative #}
+    {% if deductions.cooperative is defined %}
+        <Cooperativa>{{ deductions.cooperative }}</Cooperativa>
+    {% endif %}
+
+    {# Tax Garnishment #}
+    {% if deductions.tax_garnishment is defined %}
+        <EmbargoFiscal>{{ deductions.tax_garnishment }}</EmbargoFiscal>
+    {% endif %}
+
+    {# Complementary Plan #}
+    {% if deductions.complementary_plan is defined %}
+        <PlanComplementarios>{{ deductions.complementary_plan }}</PlanComplementarios>
+    {% endif %}
+
+    {# Education #}
+    {% if deductions.education is defined %}
+        <Educacion>{{ deductions.education }}</Educacion>
+    {% endif %}
+
+    {# Refund #}
+    {% if deductions.refund is defined %}
+        <Reintegro>{{ deductions.refund }}</Reintegro>
+    {% endif %}
+
+    {# Debt #}
+    {% if deductions.debt is defined %}
+        <Deuda>{{ deductions.debt }}</Deuda>
+    {% endif %}
+</Deducciones>

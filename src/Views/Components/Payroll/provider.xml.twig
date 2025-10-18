@@ -1,0 +1,19 @@
+<ProveedorXML
+    RazonSocial="{{ provider.company_name }}"
+    {% if provider.first_name %}
+    PrimerNombre="{{ provider.first_name }}"
+    {% endif %}
+    {% if provider.other_names %}
+    OtrosNombres="{{ provider.other_names }}"
+    {% endif %}
+    {% if provider.first_surname %}
+    PrimerApellido="{{ provider.first_surname }}"
+    {% endif %}
+    {% if provider.second_surname %}
+    SegundoApellido="{{ provider.second_surname }}"
+    {% endif %}
+    NIT="{{ provider.identification_number }}"
+    DV="{{ provider.verification_code }}"
+    SoftwareID="{{ software.identifier }}"
+    SoftwareSC=""></ProveedorXML>
+<CodigoQR>{{ environment.qr_url|replace({'CUFE': 'CUNE'}) }}</CodigoQR>
