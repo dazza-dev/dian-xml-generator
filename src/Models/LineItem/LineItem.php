@@ -51,7 +51,7 @@ class LineItem
     /**
      * Taxes
      */
-    private array $taxes;
+    private array $taxes = [];
 
     /**
      * Allowance charges
